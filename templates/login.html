@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід у систему</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex items-center justify-center p-4" style="font-family: 'Inter', sans-serif;">
+
+    <div class="max-w-md w-full bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Вхід до EventArchitecture</h2>
+            <p class="text-sm text-gray-500 mt-1">Введіть ваш Email для тестування системи</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-4 p-3 rounded-xl text-xs font-medium bg-red-50 text-red-800 border border-red-200">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Email адреса</label>
+                <input type="email" name="email" required placeholder="admin@lnu.edu.ua або user@mail.com"
+                       class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2.5 border border-transparent text-sm font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-sm">
+                Увійти
+            </button>
+        </form>
+
+        <div class="mt-6 border-t border-gray-100 pt-4 text-center">
+            <p class="text-sm text-gray-600">Немає акаунту в базі?</p>
+            <a href="/register" class="mt-2 inline-block text-sm font-semibold text-blue-600 hover:text-blue-700">
+                Створити новий профіль &rarr;
+            </a>
+        </div>
+
+        <div class="mt-4 text-center text-xs text-gray-400 font-mono">
+            Підказка: якщо ввести email зі словом "admin", система автоматично дасть вам роль адміна.
+        </div>
+    </div>
+
+</body>
+</html>

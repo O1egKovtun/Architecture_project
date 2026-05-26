@@ -1,14 +1,18 @@
+# main.py
 from flask import Flask
-from database import init_db
 from controllers.routes import main_bp
+from database import init_db
 
 app = Flask(__name__)
-app.secret_key = "eventhub_secret_key_2026"
+# Секретний ключ для шифрування сесій та повідомлень flash
+app.secret_key = "super_secret_key_for_architecture_project_2026"
 
-# Реєструємо всі маршрути з папки controllers
+# Реєстрація модульних маршрутів
 app.register_blueprint(main_bp)
 
 if __name__ == "__main__":
-    init_db()  # Ініціалізуємо базу даних при першому запуску
-    print("🎫 EventHub запущено! Відкрийте http://127.0.0.1:5000")
+    print("Генерація та перевірка таблиць SQLite...")
+    init_db()
+
+    print("Запуск локального Flask сервера на http://127.0.0.1:5000/ ...")
     app.run(debug=True)
